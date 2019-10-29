@@ -18,9 +18,7 @@ int PWM_limit;
 void Interrupt1(int pi, unsigned user_gpio, unsigned level, uint32_t tick);
 void Interrupt2(int pi, unsigned user_gpio, unsigned level, uint32_t tick);
 volatile int EncoderCounter1;
-volatile int EncoderSpeedCounter1;
 volatile int EncoderCounter2;
-volatile int EncoderSpeedCounter2;
 bool switch_direction;
 int Theta_Distance_Flag;
 
@@ -116,9 +114,7 @@ void Initialize()
 {
   PWM_limit = 150;
   EncoderCounter1 = 0;
-  EncoderSpeedCounter1 = 0;
   EncoderCounter2 = 0;
-  EncoderSpeedCounter2 = 0;
   callback(motor1.pinum, motor1.motor_ENA, FALLING_EDGE, Interrupt1);
   callback(motor1.pinum, motor2.motor_ENA, FALLING_EDGE, Interrupt2);
 
@@ -129,13 +125,11 @@ void Initialize()
 void Interrupt1(int pi, unsigned user_gpio, unsigned level, uint32_t tick)
 {
   EncoderCounter1 ++;
-  EncoderSpeedCounter1 ++;
   //ROS_INFO("Interrupt1 is %d", EncoderCounter1);
 }
 void Interrupt2(int pi, unsigned user_gpio, unsigned level, uint32_t tick)
 {
   EncoderCounter2 ++;
-  EncoderSpeedCounter2 ++;
   //ROS_INFO("Interrupt2 is %d", EncoderCounter2);
 }
 
